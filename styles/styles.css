@@ -9,6 +9,45 @@ body {
     font-family: 'Preahvihear', sans-serif;
 }
 
+/* LANDING PAGE */
+
+.landing-title {
+    font-size: 2em;
+}
+
+.landing-container {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 1.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-button {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.play-button a {
+    display: inline-block;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+.play-button img {
+    display: block;
+    height: auto;
+    padding: 15px;
+}
+
+.play-button a:hover {
+    transform: translateY(-5px) scale(1.05); 
+}
+
+/* GAME PAGE */
 .title{
     margin-bottom: 20px;
     color: #444444;
