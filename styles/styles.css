@@ -13,6 +13,7 @@ body {
 
 .landing-title {
     font-size: 2em;
+    margin-top: 30px;
 }
 
 .landing-container {
@@ -22,8 +23,17 @@ body {
     background-color: white;
     border-radius: 1.25em;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    margin-top: 20px;
+    z-index: 2;
+}
+
+.play-title {
+    text-align: center;
+    margin-top: 20px;
 }
 
 .play-button {
@@ -37,6 +47,7 @@ body {
     position: relative;
     transition: transform 0.3s ease;
 }
+
 .play-button img {
     display: block;
     height: auto;
@@ -47,7 +58,18 @@ body {
     transform: translateY(-5px) scale(1.05); 
 }
 
+.landing-duck {
+    position: absolute;
+    top: -260px;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(80%);
+    opacity: 0; /* Ocultar el pato inicialmente */
+    transition: top 1s ease, opacity 0.5s ease; /* Animación suave */
+}
+
 /* GAME PAGE */
+
 .title{
     margin-bottom: 20px;
     color: #444444;
