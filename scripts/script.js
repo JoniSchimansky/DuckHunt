@@ -8,6 +8,10 @@ let velocityX = (Math.random() - 0.5) * 7; // Velocity X random between -1 y 1
 let velocityY = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
 
 function moveDuck() {
+
+    // Change duck direction
+    duck.style.transform = velocityX < 0 ? 'rotateY(180deg)' : 'rotateY(0deg)';
+    
     posX += velocityX;
     posY += velocityY;
 
