@@ -9,16 +9,18 @@ body {
 
 .game-container {
     position: relative;
-    width: 800px;
-    height: 600px;
-    background-color: #2E8B57;
+    width: 80%;
+    height: 80%;
+}
+
+#game-background{
+    border-radius: 1.25em;
 }
 
 .duck {
     position: absolute;
     width: 50px;
     height: 50px;
-    /* background-color: #FFD700; */
     border-radius: 50%;
     transition: transform 1s linear;
 }
