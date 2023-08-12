@@ -91,12 +91,12 @@ document.addEventListener('click', () => {
 
 
 // Score
-const patitos = document.querySelectorAll('.duck');
+const ducks = document.querySelectorAll('.duck');
 const scoreElement = document.querySelector('#score');
 let score = 0;
 
-patitos.forEach(patito => {
-    patito.addEventListener('click', (event) => {
+ducks.forEach(duck => {
+    duck.addEventListener('click', (event) => {
         const points = parseInt(event.target.getAttribute('data-score'));
         score += points;
         scoreElement.textContent = score;
