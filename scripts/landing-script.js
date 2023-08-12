@@ -7,21 +7,20 @@ startGameButton.addEventListener('click', () => {
 
 
 // Show landing duck
-document.addEventListener('DOMContentLoaded', () => {
-    const playButton = document.querySelector('.play-button');
-    const landingDuck = document.querySelector('.landing-duck');
+const playButton = document.querySelector('.play-button');
+const landingDuck = document.querySelector('.landing-duck');
 
-    playButton.addEventListener('mouseenter', () => {
-            const landingDuck = document.querySelector('.landing-duck');
-            landingDuck.style.bottom = '270px';
-            landingDuck.style.opacity = '1';
-    });
-
-    playButton.addEventListener('mouseleave', () => {
-            const landingDuck = document.querySelector('.landing-duck');
-            landingDuck.style.top = '260px';
-            landingDuck.style.opacity = '0';
-    });
+playButton.addEventListener('mouseenter', () => {
+        const landingDuck = document.querySelector('.landing-duck');
+        landingDuck.style.top = '250px';
+        landingDuck.style.opacity = '1';
 });
+
+playButton.addEventListener('mouseleave', () => {
+        const landingDuck = document.querySelector('.landing-duck');
+        landingDuck.style.top = '260px';
+        landingDuck.style.opacity = '0';
+});
+
 
 

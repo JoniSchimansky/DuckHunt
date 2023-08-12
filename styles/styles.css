@@ -60,7 +60,6 @@ body {
 
 .landing-duck {
     position: absolute;
-    top: -260px;
     left: 50%;
     z-index: 1;
     transform: translateX(80%);
