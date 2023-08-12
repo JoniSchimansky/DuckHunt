@@ -1,4 +1,4 @@
-
+// Duck movement
 const duck = document.querySelector('.duck');
 const gameContainer = document.querySelector('.game-container');
 
@@ -31,4 +31,21 @@ function moveDuck() {
 }
 
 moveDuck(); // Starts animation
+
+
+// Crosshair on game-container
+const crosshairImage = new Image();
+crosshairImage.src = 'images/crosshair.png';
+crosshairImage.style.position = 'absolute';
+crosshairImage.style.pointerEvents = 'none';
+
+document.body.appendChild(crosshairImage);
+
+document.addEventListener('mousemove', (event) => {
+    crosshairImage.style.left = (event.clientX - crosshairImage.width / 2) + 'px';
+    crosshairImage.style.top = (event.clientY - crosshairImage.height / 2) + 'px';
+});
+
+
+
 
