@@ -91,6 +91,10 @@ body {
     transition: transform 0.1s linear;
 }
 
+.duck.dead {
+    transition: top 1s ease;
+}
+
 .score {
     position: absolute;
     top: 10px;

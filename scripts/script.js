@@ -80,3 +80,34 @@ checkCursor();
 
 
 
+// Shotgun sound
+const shotgunSound = new Audio('sounds/shotgun.mp3');
+shotgunSound.preload = 'auto';
+
+document.addEventListener('click', () => {
+    shotgunSound.currentTime = 0; 
+    shotgunSound.play();
+});
+
+
+// Score
+const patitos = document.querySelectorAll('.duck');
+const scoreElement = document.querySelector('#score');
+let score = 0;
+
+patitos.forEach(patito => {
+    patito.addEventListener('click', (event) => {
+        const points = parseInt(event.target.getAttribute('data-score'));
+        score += points;
+        scoreElement.textContent = score;
+    });
+});
+
+
+// Dead duck
+
+
+
+
+
+
