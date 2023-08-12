@@ -7,6 +7,13 @@ let posY = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
 let velocityX = (Math.random() - 0.5) * 7; // Velocity X random between -1 y 1
 let velocityY = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
 
+let isDuck1 = true; // Initial image state
+
+function alternateDuckImage() {
+    isDuck1 = !isDuck1;
+    duck.querySelector('img').src = isDuck1 ? 'images/duck1.png' : 'images/duck2.png';
+}
+
 function moveDuck() {
 
     // Change duck direction
@@ -27,6 +34,7 @@ function moveDuck() {
     duck.style.left = posX + 'px';
     duck.style.top = posY + 'px';
 
+    alternateDuckImage();
     requestAnimationFrame(moveDuck);
 }
 
