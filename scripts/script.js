@@ -37,15 +37,46 @@ moveDuck(); // Starts animation
 const crosshairImage = new Image();
 crosshairImage.src = 'images/crosshair.png';
 crosshairImage.style.position = 'absolute';
-crosshairImage.style.pointerEvents = 'none';
+crosshairImage.style.pointerEvents = 'none'; 
+crosshairImage.style.transform = 'translate(-50%, -50%)'; 
 
 document.body.appendChild(crosshairImage);
 
-document.addEventListener('mousemove', (event) => {
-    crosshairImage.style.left = (event.clientX - crosshairImage.width / 2) + 'px';
-    crosshairImage.style.top = (event.clientY - crosshairImage.height / 2) + 'px';
+let mouseX = 0;
+let mouseY = 0;
+let isInsideContainer = false; 
+
+gameContainer.addEventListener('mouseenter', () => {
+    document.body.style.cursor = 'none'; // Hide default cursor
+    isInsideContainer = true;
+    crosshairImage.style.display = 'block';
 });
 
+gameContainer.addEventListener('mouseleave', () => {
+    document.body.style.cursor = 'default'; // Return to the default cursor
+    isInsideContainer = false;
+    crosshairImage.style.display = 'none';
+});
+
+document.addEventListener('mousemove', (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+});
+
+function updateCursor() {
+    crosshairImage.style.left = mouseX + 'px';
+    crosshairImage.style.top = mouseY + 'px';
+    requestAnimationFrame(updateCursor);
+}
+
+function checkCursor() {
+    if (isInsideContainer) {
+        updateCursor();
+    }
+    requestAnimationFrame(checkCursor);
+}
+
+checkCursor();
 
 
 
