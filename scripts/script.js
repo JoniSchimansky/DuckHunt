@@ -8,6 +8,8 @@ let velocityX = (Math.random() - 0.5) * 7; // Velocity X random between -1 y 1
 let velocityY = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
 
 let isDuck1 = true; // Initial image state
+let frameCount = 0; // Counter for frames
+const frameChangeInterval = 10; // Change image every 10 frames
 
 function alternateDuckImage() {
     isDuck1 = !isDuck1;
@@ -34,7 +36,12 @@ function moveDuck() {
     duck.style.left = posX + 'px';
     duck.style.top = posY + 'px';
 
-    alternateDuckImage();
+    frameCount++;
+
+    if (frameCount >= frameChangeInterval) {
+        alternateDuckImage();
+        frameCount = 0; // Reset frame counter
+    }
     requestAnimationFrame(moveDuck);
 }
 
