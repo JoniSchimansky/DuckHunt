@@ -10,6 +10,7 @@ let velocityY = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
 let isDuck1 = true; // Initial image state
 let frameCount = 0; // Counter for frames
 const frameChangeInterval = 10; // Change image every 10 frames
+const duckHalfWidth = 120 / 2; // Half of the duck width in pixels
 
 function alternateDuckImage() {
     isDuck1 = !isDuck1;
@@ -19,13 +20,13 @@ function alternateDuckImage() {
 function moveDuck() {
 
     // Change duck direction
-    duck.style.transform = velocityX < 0 ? 'rotateY(180deg)' : 'rotateY(0deg)';
+    duck.style.transform = velocityX < 0 ? 'scaleX(-1)' : 'scaleX(1)'; // Flip the duck horizontally
     
     posX += velocityX;
     posY += velocityY;
 
     // Limit the duck inside the container
-    if (posX < 0 || posX > gameContainer.clientWidth - duck.clientWidth) {
+    if (posX - duckHalfWidth < 0 || posX + duckHalfWidth > gameContainer.clientWidth) {
         velocityX *= -1; // Change X direction when reaches the container border
     }
     if (posY < 0 || posY > gameContainer.clientHeight - duck.clientHeight) {
@@ -33,7 +34,7 @@ function moveDuck() {
     }
 
     // Update duck positioning
-    duck.style.left = posX + 'px';
+    duck.style.left = (posX - duckHalfWidth) + 'px';
     duck.style.top = posY + 'px';
 
     frameCount++;
