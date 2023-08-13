@@ -10,22 +10,23 @@ let velocityY = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
 let isDuck1 = true; // Initial image state
 let frameCount = 0; // Counter for frames
 const frameChangeInterval = 10; // Change image every 10 frames
+const duckHalfWidth = 120 / 2; // Half of the duck width in pixels
 
 function alternateDuckImage() {
     isDuck1 = !isDuck1;
-    duck.querySelector('img').src = isDuck1 ? 'images/duck1.png' : 'images/duck2.png';
+    duck.querySelector('img').src = isDuck1 ? '../../public/images/duck1.png' : '../../public/images/duck2.png';
 }
 
 function moveDuck() {
 
     // Change duck direction
-    duck.style.transform = velocityX < 0 ? 'rotateY(180deg)' : 'rotateY(0deg)';
+    duck.style.transform = velocityX < 0 ? 'scaleX(-1)' : 'scaleX(1)'; // Flip the duck horizontally
     
     posX += velocityX;
     posY += velocityY;
 
     // Limit the duck inside the container
-    if (posX < 0 || posX > gameContainer.clientWidth - duck.clientWidth) {
+    if (posX - duckHalfWidth < duckHalfWidth || posX + duckHalfWidth > gameContainer.clientWidth) {
         velocityX *= -1; // Change X direction when reaches the container border
     }
     if (posY < 0 || posY > gameContainer.clientHeight - duck.clientHeight) {
@@ -33,7 +34,7 @@ function moveDuck() {
     }
 
     // Update duck positioning
-    duck.style.left = posX + 'px';
+    duck.style.left = (posX - duckHalfWidth) + 'px';
     duck.style.top = posY + 'px';
 
     frameCount++;
@@ -50,7 +51,7 @@ moveDuck(); // Starts animation
 
 // Crosshair on game-container
 const crosshairImage = new Image();
-crosshairImage.src = 'images/crosshair.png';
+crosshairImage.src = '../../public/images/crosshair.png';
 crosshairImage.style.position = 'absolute';
 crosshairImage.style.pointerEvents = 'none'; 
 crosshairImage.style.transform = 'translate(-50%, -50%)'; 
@@ -96,7 +97,7 @@ checkCursor();
 
 
 // Shotgun sound
-const shotgunSound = new Audio('sounds/shotgun.mp3');
+const shotgunSound = new Audio('../../public/sounds/shotgun.mp3');
 shotgunSound.preload = 'auto';
 
 document.addEventListener('click', () => {
