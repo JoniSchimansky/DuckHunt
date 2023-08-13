@@ -4,8 +4,8 @@ const gameContainer = document.querySelector('.game-container');
 
 let posX = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
 let posY = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
-let velocityX = (Math.random() - 0.5) * 7; // Velocity X random between -1 y 1
-let velocityY = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
+let velocityX = 10; // Velocity X random between -1 y 1
+let velocityY = (Math.random() - 0.5) * 2; // Velocity Y random between -1 y 1
 
 let isDuck1 = true; // Initial image state
 let frameCount = 0; // Counter for frames
@@ -26,7 +26,7 @@ function moveDuck() {
     posY += velocityY;
 
     // Limit the duck inside the container
-    if (posX - duckHalfWidth < 0 || posX + duckHalfWidth > gameContainer.clientWidth) {
+    if (posX - duckHalfWidth < duckHalfWidth || posX + duckHalfWidth > gameContainer.clientWidth) {
         velocityX *= -1; // Change X direction when reaches the container border
     }
     if (posY < 0 || posY > gameContainer.clientHeight - duck.clientHeight) {
