@@ -4,38 +4,74 @@ const gameContainer: HTMLElement | null = document.querySelector('.game-containe
 
 let posX: number = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
 let posY: number = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
-let velocityX: number = (Math.random() - 0.5) * 7; // Velocity X random between -1 y 1
-let velocityY: number = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
+let velocityX: number = (Math.random() - 0.5) * 4; // Velocity X random between -1 y 1
+let velocityY: number = (Math.random() - 0.5) * 4; // Velocity Y random between -1 y 1
 
+let isDuckAlive: boolean = true; // Initial state
+let isDuckFlying: boolean = true; // Initial state
 let isDuck1: boolean = true; // Initial image state
 let frameCount: number = 0; // Counter for frames
-const frameChangeInterval: number = 10; // Change image every 10 frames
-const duckHalfWidth: number = 120 / 2; // Half of the duck width in pixels
+const frameChangeInterval = 10; // Change image every 10 frames
+const duckHalfWidth = 120 / 2; // Half of the duck width in pixels
 
 function alternateDuckImage() {
-    isDuck1 = !isDuck1;
-    duck.querySelector('img').src = isDuck1 ? '../../public/images/duck1.png' : '../../public/images/duck2.png';
+    if (isDuckAlive) {
+        isDuck1 = !isDuck1;
+        duck.querySelector('img').src = isDuck1 ? '../../public/images/duck1.png' : '../../public/images/duck2.png';
+    }
+}
+
+function stopDuck() {
+    isDuckFlying = false;
+}
+
+function respawnDuck() {
+    // Reset duck properties and variables
+    posX = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
+    posY = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
+    isDuckAlive = true;
+    isDuckFlying = true;
+    isDuck1 = true;
+    // frameCount = 0;
+
+    // Reset duck's image and position
+    duck.querySelector('img').src = '../../public/images/duck1.png';
+    duck.style.display = 'block';
+    duck.style.left = (posX - duckHalfWidth) + 'px';
+    duck.style.top = posY + 'px';
+
+    moveDuck(); // Start animation for the new duck
 }
 
 function moveDuck() {
+    if (isDuckFlying) {
+        // Change duck direction
+        duck.style.transform = velocityX < 0 ? 'scaleX(-1)' : 'scaleX(1)'; // Flip the duck horizontally
 
-    // Change duck direction
-    duck.style.transform = velocityX < 0 ? 'scaleX(-1)' : 'scaleX(1)'; // Flip the duck horizontally
-    
-    posX += velocityX;
-    posY += velocityY;
+        posX += velocityX;
+        posY += velocityY;
 
-    // Limit the duck inside the container
-    if (posX - duckHalfWidth < duckHalfWidth || posX + duckHalfWidth > gameContainer.clientWidth) {
-        velocityX *= -1; // Change X direction when reaches the container border
+        // Limit the duck inside the container
+        if (posX - duckHalfWidth < duckHalfWidth || posX + duckHalfWidth > gameContainer.clientWidth) {
+            velocityX *= -1; // Change X direction when reaches the container border
+        }
+        if (posY < 0 || posY > gameContainer.clientHeight - duck.clientHeight) {
+            velocityY *= -1; // Change Y direction when reaches the container border
+        }
+
+        // Update duck positioning
+        duck.style.left = (posX - duckHalfWidth) + 'px';
+        duck.style.top = posY + 'px';
+    } else {
+        posY += 7; // Move duck vertically downwards
+        duck.style.top = posY + 'px';
+
+        // Check if the duck has reached the bottom of the container
+        if (posY > gameContainer.clientHeight - duck.clientHeight) {
+            duck.style.display = 'none'; // Hide the duck
+            
+        }
     }
-    if (posY < 0 || posY > gameContainer.clientHeight - duck.clientHeight) {
-        velocityY *= -1; // Change Y direction when reaches the container border
-    }
-
-    // Update duck positioning
-    duck.style.left = (posX - duckHalfWidth) + 'px';
-    duck.style.top = posY + 'px';
 
     frameCount++;
 
@@ -45,6 +81,16 @@ function moveDuck() {
     }
     requestAnimationFrame(moveDuck);
 }
+
+duck.addEventListener('click', () => {
+    if (isDuckAlive) {
+        duck.querySelector('img').src = '../../public/images/dead_duck.png';
+        isDuckAlive = false;
+        stopDuck();
+        setTimeout(respawnDuck, 1000); // Respawn the duck after a delay (1 second)
+    }
+});
+
 
 moveDuck(); // Starts animation
 
@@ -118,8 +164,6 @@ ducks.forEach(duck => {
     });
 });
 
-
-// Dead duck
 
 
 
