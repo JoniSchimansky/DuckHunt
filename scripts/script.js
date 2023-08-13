@@ -4,8 +4,8 @@ const gameContainer = document.querySelector('.game-container');
 
 let posX = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
 let posY = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
-let velocityX = 10; // Velocity X random between -1 y 1
-let velocityY = (Math.random() - 0.5) * 2; // Velocity Y random between -1 y 1
+let velocityX = (Math.random() - 0.5) * 7; // Velocity X random between -1 y 1
+let velocityY = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
 
 let isDuck1 = true; // Initial image state
 let frameCount = 0; // Counter for frames
