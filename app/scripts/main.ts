@@ -47,6 +47,12 @@ function moveDuck() {
     } else {
         posY += 5; // Move duck vertically downwards
         duck.style.top = posY + 'px';
+
+        // Check if the duck has reached the bottom of the container
+        if (posY > gameContainer.clientHeight - duck.clientHeight) {
+            duck.style.display = 'none'; // Hide the duck
+            
+        }
     }
 
     frameCount++;
