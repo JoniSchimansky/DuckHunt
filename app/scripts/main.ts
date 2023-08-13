@@ -4,8 +4,8 @@ const gameContainer = document.querySelector('.game-container');
 
 let posX = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
 let posY = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
-let velocityX = (Math.random() - 0.5) * 7; // Velocity X random between -1 y 1
-let velocityY = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
+let velocityX = (Math.random() - 0.5) * 4; // Velocity X random between -1 y 1
+let velocityY = (Math.random() - 0.5) * 4; // Velocity Y random between -1 y 1
 
 let isDuckAlive = true; // Initial state
 let isDuckFlying = true; // Initial state
@@ -23,6 +23,24 @@ function alternateDuckImage() {
 
 function stopDuck() {
     isDuckFlying = false;
+}
+
+function respawnDuck() {
+    // Reset duck properties and variables
+    posX = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
+    posY = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
+    isDuckAlive = true;
+    isDuckFlying = true;
+    isDuck1 = true;
+    // frameCount = 0;
+
+    // Reset duck's image and position
+    duck.querySelector('img').src = '../../public/images/duck1.png';
+    duck.style.display = 'block';
+    duck.style.left = (posX - duckHalfWidth) + 'px';
+    duck.style.top = posY + 'px';
+
+    moveDuck(); // Start animation for the new duck
 }
 
 function moveDuck() {
@@ -45,7 +63,7 @@ function moveDuck() {
         duck.style.left = (posX - duckHalfWidth) + 'px';
         duck.style.top = posY + 'px';
     } else {
-        posY += 10; // Move duck vertically downwards
+        posY += 7; // Move duck vertically downwards
         duck.style.top = posY + 'px';
 
         // Check if the duck has reached the bottom of the container
@@ -69,8 +87,10 @@ duck.addEventListener('click', () => {
         duck.querySelector('img').src = '../../public/images/dead_duck.png';
         isDuckAlive = false;
         stopDuck();
+        setTimeout(respawnDuck, 1000); // Respawn the duck after a delay (1 second)
     }
 });
+
 
 moveDuck(); // Starts animation
 
