@@ -45,7 +45,7 @@ function moveDuck() {
         duck.style.left = (posX - duckHalfWidth) + 'px';
         duck.style.top = posY + 'px';
     } else {
-        posY += 5; // Move duck vertically downwards
+        posY += 10; // Move duck vertically downwards
         duck.style.top = posY + 'px';
 
         // Check if the duck has reached the bottom of the container
