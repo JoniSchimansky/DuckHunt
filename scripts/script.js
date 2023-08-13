@@ -18,8 +18,6 @@ function alternateDuckImage() {
 }
 
 function moveDuck() {
-    
-
     // Change duck direction
     duck.style.transform = velocityX < 0 ? 'scaleX(-1)' : 'scaleX(1)'; // Flip the duck horizontally
     
