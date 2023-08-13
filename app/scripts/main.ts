@@ -7,35 +7,47 @@ let posY = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
 let velocityX = (Math.random() - 0.5) * 7; // Velocity X random between -1 y 1
 let velocityY = (Math.random() - 0.5) * 7; // Velocity Y random between -1 y 1
 
+let isDuckAlive = true; // Initial state
+let isDuckFlying = true; // Initial state
 let isDuck1 = true; // Initial image state
 let frameCount = 0; // Counter for frames
 const frameChangeInterval = 10; // Change image every 10 frames
 const duckHalfWidth = 120 / 2; // Half of the duck width in pixels
 
 function alternateDuckImage() {
-    isDuck1 = !isDuck1;
-    duck.querySelector('img').src = isDuck1 ? '../../public/images/duck1.png' : '../../public/images/duck2.png';
+    if (isDuckAlive) {
+        isDuck1 = !isDuck1;
+        duck.querySelector('img').src = isDuck1 ? '../../public/images/duck1.png' : '../../public/images/duck2.png';
+    }
+}
+
+function stopDuck() {
+    isDuckFlying = false;
 }
 
 function moveDuck() {
+    if (isDuckFlying) {
+        // Change duck direction
+        duck.style.transform = velocityX < 0 ? 'scaleX(-1)' : 'scaleX(1)'; // Flip the duck horizontally
 
-    // Change duck direction
-    duck.style.transform = velocityX < 0 ? 'scaleX(-1)' : 'scaleX(1)'; // Flip the duck horizontally
-    
-    posX += velocityX;
-    posY += velocityY;
+        posX += velocityX;
+        posY += velocityY;
 
-    // Limit the duck inside the container
-    if (posX - duckHalfWidth < duckHalfWidth || posX + duckHalfWidth > gameContainer.clientWidth) {
-        velocityX *= -1; // Change X direction when reaches the container border
+        // Limit the duck inside the container
+        if (posX - duckHalfWidth < duckHalfWidth || posX + duckHalfWidth > gameContainer.clientWidth) {
+            velocityX *= -1; // Change X direction when reaches the container border
+        }
+        if (posY < 0 || posY > gameContainer.clientHeight - duck.clientHeight) {
+            velocityY *= -1; // Change Y direction when reaches the container border
+        }
+
+        // Update duck positioning
+        duck.style.left = (posX - duckHalfWidth) + 'px';
+        duck.style.top = posY + 'px';
+    } else {
+        posY += 5; // Move duck vertically downwards
+        duck.style.top = posY + 'px';
     }
-    if (posY < 0 || posY > gameContainer.clientHeight - duck.clientHeight) {
-        velocityY *= -1; // Change Y direction when reaches the container border
-    }
-
-    // Update duck positioning
-    duck.style.left = (posX - duckHalfWidth) + 'px';
-    duck.style.top = posY + 'px';
 
     frameCount++;
 
@@ -45,6 +57,14 @@ function moveDuck() {
     }
     requestAnimationFrame(moveDuck);
 }
+
+duck.addEventListener('click', () => {
+    if (isDuckAlive) {
+        duck.querySelector('img').src = '../../public/images/dead_duck.png';
+        isDuckAlive = false;
+        stopDuck();
+    }
+});
 
 moveDuck(); // Starts animation
 
@@ -119,8 +139,6 @@ ducks.forEach(duck => {
     });
 });
 
-
-// Dead duck
 
 
 
