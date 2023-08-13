@@ -14,10 +14,11 @@ const duckHalfWidth = 120 / 2; // Half of the duck width in pixels
 
 function alternateDuckImage() {
     isDuck1 = !isDuck1;
-    duck.querySelector('img').src = isDuck1 ? 'images/duck1.png' : 'images/duck2.png';
+    duck.querySelector('img').src = isDuck1 ? '../../public/images/duck1.png' : '../../public/images/duck2.png';
 }
 
 function moveDuck() {
+
     // Change duck direction
     duck.style.transform = velocityX < 0 ? 'scaleX(-1)' : 'scaleX(1)'; // Flip the duck horizontally
     
@@ -50,7 +51,7 @@ moveDuck(); // Starts animation
 
 // Crosshair on game-container
 const crosshairImage = new Image();
-crosshairImage.src = 'images/crosshair.png';
+crosshairImage.src = '../../public/images/crosshair.png';
 crosshairImage.style.position = 'absolute';
 crosshairImage.style.pointerEvents = 'none'; 
 crosshairImage.style.transform = 'translate(-50%, -50%)'; 
@@ -96,7 +97,7 @@ checkCursor();
 
 
 // Shotgun sound
-const shotgunSound = new Audio('sounds/shotgun.mp3');
+const shotgunSound = new Audio('../../public/sounds/shotgun.mp3');
 shotgunSound.preload = 'auto';
 
 document.addEventListener('click', () => {
@@ -117,3 +118,12 @@ ducks.forEach(duck => {
         scoreElement.textContent = score;
     });
 });
+
+
+// Dead duck
+
+
+
+
+
+
