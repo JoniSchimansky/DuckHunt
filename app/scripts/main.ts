@@ -1,16 +1,16 @@
 // Duck movement
-const duck = document.querySelector('.duck');
-const gameContainer = document.querySelector('.game-container');
+const duck: HTMLElement | null = document.querySelector('.duck');
+const gameContainer: HTMLElement | null = document.querySelector('.game-container');
 
-let posX = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
-let posY = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
-let velocityX = (Math.random() - 0.5) * 4; // Velocity X random between -1 y 1
-let velocityY = (Math.random() - 0.5) * 4; // Velocity Y random between -1 y 1
+let posX: number = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
+let posY: number = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
+let velocityX: number = (Math.random() - 0.5) * 4; // Velocity X random between -1 y 1
+let velocityY: number = (Math.random() - 0.5) * 4; // Velocity Y random between -1 y 1
 
-let isDuckAlive = true; // Initial state
-let isDuckFlying = true; // Initial state
-let isDuck1 = true; // Initial image state
-let frameCount = 0; // Counter for frames
+let isDuckAlive: boolean = true; // Initial state
+let isDuckFlying: boolean = true; // Initial state
+let isDuck1: boolean = true; // Initial image state
+let frameCount: number = 0; // Counter for frames
 const frameChangeInterval = 10; // Change image every 10 frames
 const duckHalfWidth = 120 / 2; // Half of the duck width in pixels
 
@@ -96,7 +96,7 @@ moveDuck(); // Starts animation
 
 
 // Crosshair on game-container
-const crosshairImage = new Image();
+const crosshairImage: HTMLImageElement = new Image();
 crosshairImage.src = '../../public/images/crosshair.png';
 crosshairImage.style.position = 'absolute';
 crosshairImage.style.pointerEvents = 'none'; 
@@ -104,9 +104,9 @@ crosshairImage.style.transform = 'translate(-50%, -50%)';
 
 document.body.appendChild(crosshairImage);
 
-let mouseX = 0;
-let mouseY = 0;
-let isInsideContainer = false; 
+let mouseX: number = 0;
+let mouseY: number = 0;
+let isInsideContainer: boolean = false; 
 
 gameContainer.addEventListener('mouseenter', () => {
     document.body.style.cursor = 'none'; // Hide default cursor
@@ -140,10 +140,8 @@ function checkCursor() {
 
 checkCursor();
 
-
-
 // Shotgun sound
-const shotgunSound = new Audio('../../public/sounds/shotgun.mp3');
+const shotgunSound: HTMLAudioElement = new Audio('../../public/sounds/shotgun.mp3');
 shotgunSound.preload = 'auto';
 
 document.addEventListener('click', () => {
@@ -153,15 +151,16 @@ document.addEventListener('click', () => {
 
 
 // Score
-const ducks = document.querySelectorAll('.duck');
-const scoreElement = document.querySelector('#score');
+const ducks: NodeList = document.querySelectorAll('.duck');
+const scoreElement: HTMLElement = document.querySelector('#score');
 let score = 0;
 
 ducks.forEach(duck => {
-    duck.addEventListener('click', (event) => {
-        const points = parseInt(event.target.getAttribute('data-score'));
+    duck.addEventListener('click', (event: Event) => {
+        const target = event.target as HTMLButtonElement;
+        const points: number = parseInt(target.getAttribute('data-score'));
         score += points;
-        scoreElement.textContent = score;
+        scoreElement.textContent = score.toString();
     });
 });
 
