@@ -4,8 +4,8 @@ const gameContainer: HTMLElement | null = document.querySelector('.game-containe
 
 let posX: number = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
 let posY: number = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
-let velocityX: number = (Math.random() - 0.5) * 4; // Velocity X random between -1 y 1
-let velocityY: number = (Math.random() - 0.5) * 4; // Velocity Y random between -1 y 1
+let velocityX: number = 4;
+let velocityY: number = 4;
 
 let isDuckAlive: boolean = true; // Initial state
 let isDuckFlying: boolean = true; // Initial state
@@ -39,8 +39,6 @@ function respawnDuck() {
     duck.style.display = 'block';
     duck.style.left = (posX - duckHalfWidth) + 'px';
     duck.style.top = posY + 'px';
-
-    moveDuck(); // Start animation for the new duck
 }
 
 function moveDuck() {
