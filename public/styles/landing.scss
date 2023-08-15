@@ -1,0 +1,85 @@
+@mixin small-duck {
+    opacity: 1 !important;
+    right: 70px;
+    top: -70px;
+
+    img {
+        width: 110px;
+    }
+}
+
+.landing-container {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: 1.25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    max-width: 520px;
+
+    @include phone {
+        width: 90%;
+    }
+
+    @include tablet-portrait {
+        width: 90%;
+    }
+
+    .play-title {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .play-button {
+        position: relative;
+        display: inline-block;
+        overflow: hidden;
+
+        a {
+            display: inline-block;
+            position: relative;
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px) scale(1.05); 
+            }
+        }
+        
+        img {
+            display: block;
+            height: auto;
+            padding: 15px;
+        }
+    }
+
+    .landing-duck {
+        position: absolute;
+        right: 94px;
+        top: -100px;
+        z-index: -1;
+        transform: translateX(80%);
+        opacity: 0;
+        transition: top 1s ease, opacity 0.5s ease;
+
+        &.show-duck {
+            opacity: 1;
+            top: -105px;
+        }
+
+        img {
+            width: 160px;
+        }
+
+        @include phone {
+            @include small-duck()
+        }
+
+        @include tablet-portrait {
+            @include small-duck()
+        }
+    }
+}

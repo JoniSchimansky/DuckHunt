@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/styles/styles.css">
+    <style lang="scss">
+        @import "public/styles/landing.scss";
+    </style>
     <title>DuckHunt</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +14,7 @@
 
 </head>
 <body>
-    <div class="landing-title">
+    <div class="title">
         <h1>DUCKHUNT</h1>
     </div>
     <div class="landing-container">
@@ -24,9 +26,9 @@
                 <img src="public/images/play-button.png" alt="Play Button" width="100px">
             </a>
         </div>
-    </div>
-    <div class="landing-duck">
-        <img src="public/images/landing-duck.png" alt="landing-duck" width="220px">
+        <div class="landing-duck">
+            <img src="public/images/landing-duck.png" alt="landing-duck" width="220px">
+        </div>    
     </div>
     <script type="module" src="app/scripts/landing-scripts.ts"></script>
 </body>
