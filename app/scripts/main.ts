@@ -39,8 +39,6 @@ function respawnDuck() {
     duck.style.display = 'block';
     duck.style.left = (posX - duckHalfWidth) + 'px';
     duck.style.top = posY + 'px';
-
-    moveDuck(); // Start animation for the new duck
 }
 
 function moveDuck() {
