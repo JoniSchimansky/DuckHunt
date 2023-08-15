@@ -1,0 +1,48 @@
+.title {
+    font-size: 1em;
+}
+
+.game-container {
+    position: relative;
+    width: 80%;
+}
+
+#game-background{
+    border-radius: 1.25em;
+}
+
+.duck {
+    position: absolute;
+    width: 100px;
+    border-radius: 50%;
+    transition: transform 0.1s linear;
+
+    @include phone {
+        width: 50px;
+    }
+
+    
+    @include tablet-portrait {
+        width: 50px;
+    }
+
+    img {
+        width: 100%;
+    }
+}
+
+.duck.dead {
+    transition: top 1s ease;
+}
+
+.score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #444444;
+}
+
+.game-container {
+    cursor: none;
+}
