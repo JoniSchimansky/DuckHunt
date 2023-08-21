@@ -147,9 +147,7 @@ gameContainer.addEventListener('click', shotgunFiredEvent);
 
 function duckClickedEvent(event: Event) {
     const image = event.target as HTMLImageElement;
-    const target = event.target as HTMLButtonElement;
-    const points: number = parseInt(target.getAttribute('data-score'));
-    score += points;
+    score += 1;
     scoreElement.textContent = score.toString();
 
     // TODO: Change isDuck alive from variable to an object property. 
@@ -164,7 +162,6 @@ function duckClickedEvent(event: Event) {
 
 function addListenerToDucks() {    
     ducks.forEach((duck) => {
-        console.log("entra duck")
         duck.addEventListener('click', duckClickedEvent);
     });
 }
