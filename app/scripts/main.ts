@@ -2,8 +2,9 @@
 const duck: HTMLElement | null = document.querySelector('.duck');
 const gameContainer: HTMLElement | null = document.querySelector('.game-container');
 
-let posX: number = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
-let posY: number = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
+let posX = Math.random() * (gameContainer.offsetWidth - duck.offsetWidth);
+let posY = Math.random() * (gameContainer.offsetHeight - duck.offsetHeight);
+
 let velocityX: number = 4;
 let velocityY: number = 4;
 
@@ -12,7 +13,6 @@ let isDuckFlying: boolean = true; // Initial state
 let isDuck1: boolean = true; // Initial image state
 let frameCount: number = 0; // Counter for frames
 const frameChangeInterval = 10; // Change image every 10 frames
-const duckHalfWidth = 120 / 2; // Half of the duck width in pixels
 
 // Score
 let score = 0;
@@ -32,8 +32,8 @@ function stopDuck() {
 
 function respawnDuck() {
     // Reset duck properties and variables
-    posX = Math.random() * (gameContainer.clientWidth - duck.clientWidth);
-    posY = Math.random() * (gameContainer.clientHeight - duck.clientHeight);
+    posX = Math.random() * (gameContainer.offsetWidth - duck.offsetWidth);
+    posY = Math.random() * (gameContainer.offsetHeight - duck.offsetHeight);
     isDuckAlive = true;
     isDuckFlying = true;
     isDuck1 = true;
@@ -42,7 +42,7 @@ function respawnDuck() {
     // Reset duck's image and position
     duck.querySelector('img').src = '../../public/images/duck1.png';
     duck.style.display = 'block';
-    duck.style.left = (posX - duckHalfWidth) + 'px';
+    duck.style.left = posX + 'px';
     duck.style.top = posY + 'px';
 }
 
@@ -51,19 +51,20 @@ function moveDuck() {
         // Change duck direction
         duck.style.transform = velocityX < 0 ? 'scaleX(-1)' : 'scaleX(1)'; // Flip the duck horizontally
 
-        posX += velocityX;
-        posY += velocityY;
-
-        // Limit the duck inside the container
-        if (posX - duckHalfWidth < duckHalfWidth || posX + duckHalfWidth > gameContainer.clientWidth) {
+        //Limit the duck inside the container
+        if (posX < 0 || posX > gameContainer.clientWidth - duck.clientWidth) {
             velocityX *= -1; // Change X direction when reaches the container border
         }
         if (posY < 0 || posY > gameContainer.clientHeight - duck.clientHeight) {
             velocityY *= -1; // Change Y direction when reaches the container border
         }
 
+        posX += velocityX;
+        posY += velocityY;
+
+
         // Update duck positioning
-        duck.style.left = (posX - duckHalfWidth) + 'px';
+        duck.style.left = posX + 'px';
         duck.style.top = posY + 'px';
     } else {
         posY += 7; // Move duck vertically downwards
