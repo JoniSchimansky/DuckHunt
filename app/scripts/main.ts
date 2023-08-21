@@ -88,50 +88,13 @@ function moveDuck() {
 
 moveDuck(); // Starts animation
 
-// Crosshair on game-container
-const crosshairImage: HTMLImageElement = new Image();
-crosshairImage.src = '../../public/images/crosshair.png';
-crosshairImage.style.position = 'absolute';
-crosshairImage.style.pointerEvents = 'none'; 
-crosshairImage.style.transform = 'translate(-50%, -50%)'; 
-
-document.body.appendChild(crosshairImage);
-
 let mouseX: number = 0;
 let mouseY: number = 0;
-let isInsideContainer: boolean = false; 
-
-gameContainer.addEventListener('mouseenter', () => {
-    document.body.style.cursor = 'none'; // Hide default cursor
-    isInsideContainer = true;
-    crosshairImage.style.display = 'block';
-});
-
-gameContainer.addEventListener('mouseleave', () => {
-    document.body.style.cursor = 'default'; // Return to the default cursor
-    isInsideContainer = false;
-    crosshairImage.style.display = 'none';
-});
 
 document.addEventListener('mousemove', (event) => {
     mouseX = event.clientX;
     mouseY = event.clientY;
 });
-
-function updateCursor() {
-    crosshairImage.style.left = mouseX + 'px';
-    crosshairImage.style.top = mouseY + 'px';
-    requestAnimationFrame(updateCursor);
-}
-
-function checkCursor() {
-    if (isInsideContainer) {
-        updateCursor();
-    }
-    requestAnimationFrame(checkCursor);
-}
-
-checkCursor();
 
 // Shotgun sound
 const shotgunSound: HTMLAudioElement = new Audio('../../public/sounds/shotgun.mp3');
@@ -147,7 +110,8 @@ function shotgunFiredEvent() {
 gameContainer.addEventListener('click', shotgunFiredEvent);
 
 function duckClickedEvent(event: Event) {
-    const duckImage = event.target as HTMLImageElement;
+    const duck = event.currentTarget as HTMLElement;
+    const duckImage = duck.querySelector('img');
     const duckPoints = Number(duckImage.getAttribute('data-score'));
 
     // Increase the global score
@@ -194,8 +158,6 @@ function playGame() {
     velocityX = 4;
     velocityY = 4;
 
-    document.body.appendChild(crosshairImage);
-
     gameContainer.addEventListener('click', shotgunFiredEvent);
 
     addListenerToDucks();
@@ -208,8 +170,6 @@ function pauseGame() {
     isDuckAlive = false;
     velocityX = 0;
     velocityY = 0;
-
-    document.body.removeChild(crosshairImage);
 
     gameContainer.removeEventListener('click', shotgunFiredEvent);
     removeListenerToDucks();
