@@ -146,15 +146,17 @@ function shotgunFiredEvent() {
 gameContainer.addEventListener('click', shotgunFiredEvent);
 
 function duckClickedEvent(event: Event) {
-    const image = event.target as HTMLImageElement;
-    const target = event.target as HTMLButtonElement;
-    const points: number = parseInt(target.getAttribute('data-score'));
-    score += points;
+    const duckImage = event.target as HTMLImageElement;
+    const duckPoints = Number(duckImage.getAttribute('data-score'));
+
+    // Increase the global score
+    score += duckPoints;
+
     scoreElement.textContent = score.toString();
 
     // TODO: Change isDuck alive from variable to an object property. 
     if (isDuckAlive) {
-        image.src = '../../public/images/dead_duck.png';
+        duckImage.src = '../../public/images/dead_duck.png';
 
         isDuckAlive = false;
         stopDuck();
@@ -164,7 +166,6 @@ function duckClickedEvent(event: Event) {
 
 function addListenerToDucks() {    
     ducks.forEach((duck) => {
-        console.log("entra duck")
         duck.addEventListener('click', duckClickedEvent);
     });
 }

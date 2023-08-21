@@ -27,7 +27,7 @@
 .duck {
     position: absolute;
     width: 100px;
-    border-radius: 50%;
+    
     transition: transform 0.1s linear;
 
     @include phone {
