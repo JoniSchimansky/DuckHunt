@@ -14,6 +14,11 @@ let frameCount: number = 0; // Counter for frames
 const frameChangeInterval = 10; // Change image every 10 frames
 const duckHalfWidth = 120 / 2; // Half of the duck width in pixels
 
+// Score
+let score = 0;
+const ducks: NodeList = document.querySelectorAll('.duck');
+const scoreElement: HTMLElement = document.querySelector('#score');
+
 function alternateDuckImage() {
     if (isDuckAlive) {
         isDuck1 = !isDuck1;
@@ -80,18 +85,7 @@ function moveDuck() {
     requestAnimationFrame(moveDuck);
 }
 
-duck.addEventListener('click', () => {
-    if (isDuckAlive) {
-        duck.querySelector('img').src = '../../public/images/dead_duck.png';
-        isDuckAlive = false;
-        stopDuck();
-        setTimeout(respawnDuck, 1000); // Respawn the duck after a delay (1 second)
-    }
-});
-
-
 moveDuck(); // Starts animation
-
 
 // Crosshair on game-container
 const crosshairImage: HTMLImageElement = new Image();
@@ -142,28 +136,82 @@ checkCursor();
 const shotgunSound: HTMLAudioElement = new Audio('../../public/sounds/shotgun.mp3');
 shotgunSound.preload = 'auto';
 
-document.addEventListener('click', () => {
+
+function shotgunFiredEvent() {
     shotgunSound.currentTime = 0; 
+    shotgunSound.volume = 0.1;
     shotgunSound.play();
-});
+}
 
+gameContainer.addEventListener('click', shotgunFiredEvent);
 
-// Score
-const ducks: NodeList = document.querySelectorAll('.duck');
-const scoreElement: HTMLElement = document.querySelector('#score');
-let score = 0;
+function duckClickedEvent(event: Event) {
+    const image = event.target as HTMLImageElement;
+    const target = event.target as HTMLButtonElement;
+    const points: number = parseInt(target.getAttribute('data-score'));
+    score += points;
+    scoreElement.textContent = score.toString();
 
-ducks.forEach(duck => {
-    duck.addEventListener('click', (event: Event) => {
-        const target = event.target as HTMLButtonElement;
-        const points: number = parseInt(target.getAttribute('data-score'));
-        score += points;
-        scoreElement.textContent = score.toString();
+    // TODO: Change isDuck alive from variable to an object property. 
+    if (isDuckAlive) {
+        image.src = '../../public/images/dead_duck.png';
+
+        isDuckAlive = false;
+        stopDuck();
+        setTimeout(respawnDuck, 1000); // Respawn the duck after a delay (1 second)
+    }
+}
+
+function addListenerToDucks() {    
+    ducks.forEach((duck) => {
+        console.log("entra duck")
+        duck.addEventListener('click', duckClickedEvent);
     });
-});
+}
 
+addListenerToDucks(); // Add interaction to duck elements
 
+function removeListenerToDucks() {
+    ducks.forEach((duck) => {
+        duck.removeEventListener('click', duckClickedEvent);
+    });
+}
 
+const pause = document.querySelector("#pause");
+const play = document.querySelector("#play");
+
+pause.addEventListener('click', pauseGame);
+
+play.addEventListener('click', playGame);
+
+function playGame() {
+    pause.classList.remove('hide');
+    play.classList.add('hide');
+
+    isDuckAlive = true;
+    velocityX = 4;
+    velocityY = 4;
+
+    document.body.appendChild(crosshairImage);
+
+    gameContainer.addEventListener('click', shotgunFiredEvent);
+
+    addListenerToDucks();
+}
+
+function pauseGame() {
+    pause.classList.add('hide');
+    play.classList.remove('hide');
+
+    isDuckAlive = false;
+    velocityX = 0;
+    velocityY = 0;
+
+    document.body.removeChild(crosshairImage);
+
+    gameContainer.removeEventListener('click', shotgunFiredEvent);
+    removeListenerToDucks();
+}
 
 
 
