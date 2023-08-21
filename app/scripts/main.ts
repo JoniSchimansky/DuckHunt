@@ -2,8 +2,8 @@
 const duck: HTMLElement | null = document.querySelector('.duck');
 const gameContainer: HTMLElement | null = document.querySelector('.game-container');
 
-let posX = Math.random() * (gameContainer.offsetWidth - duck.offsetWidth);
-let posY = Math.random() * (gameContainer.offsetHeight - duck.offsetHeight);
+let posX: number = Math.random() * (gameContainer.offsetWidth - duck.offsetWidth);
+let posY: number = Math.random() * (gameContainer.offsetHeight - duck.offsetHeight);
 
 let velocityX: number = 4;
 let velocityY: number = 4;
@@ -12,10 +12,10 @@ let isDuckAlive: boolean = true; // Initial state
 let isDuckFlying: boolean = true; // Initial state
 let isDuck1: boolean = true; // Initial image state
 let frameCount: number = 0; // Counter for frames
-const frameChangeInterval = 10; // Change image every 10 frames
+const frameChangeInterval: number = 10; // Change image every 10 frames
 
 // Score
-let score = 0;
+let score: number = 0;
 const ducks: NodeList = document.querySelectorAll('.duck');
 const scoreElement: HTMLElement = document.querySelector('#score');
 
