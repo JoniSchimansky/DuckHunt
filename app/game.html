@@ -21,14 +21,16 @@
         <i id="pause" class="fa-solid fa-pause"></i>
     </div>
     <div class="game-container">
+        <div class="pause-layout hide">
+            <h2>PAUSED</h2>
+        </div>
         <div class="game-background">
             <img id="game-background" src="../public/images/background.png" alt="" width=100%>
         </div>
-        <div class="duck">
-            <img src="../public/images/duck1.png" alt="" width="120px" data-score="1">
-        </div>
         <div class="score">Score: <span id="score">0</span></div>
+        <h2 class="wave-title">WAVE <span class="wave-number">1</span></h2>
+        
     </div>
-    <script src="scripts/main.ts"></script>
+    <script type="module" src="scripts/main.ts"></script>
 </body>
 </html>
