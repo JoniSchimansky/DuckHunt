@@ -101,6 +101,7 @@
     background-image: url('../public/images/background.png');
     background-size: auto 100%;
     animation: scrollCarousel 50s linear infinite;
+    background-repeat: repeat;
 }
 
 @keyframes scrollCarousel {
@@ -111,3 +112,13 @@
         transform: translateX(-50%);
     }
 }
+
+// Animated title
+.animated-title {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    font-size: 36px;
+}
+
