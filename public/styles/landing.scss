@@ -84,25 +84,24 @@
     }
 }
 
-/* Estilos para el fondo animado */
 .background {
     position: fixed;
     top: 0;
     left: 0;
     width: 200%;
     height: 100%;
-    z-index: -2; /* Colocar el fondo detrás de otros elementos */
+    z-index: -2;
     background-image: url('../public/images/background.png');
-    background-size: auto 100%; /* Ajustar imagen al tamaño del contenedor */
-    animation: parallax 10s infinite linear; /* Animación de movimiento */
+    background-size: auto 100%;
+    animation: parallax 10s infinite linear;
 }
 
-/* Animación de parallax */
+/* Parallax animation */
 @keyframes parallax {
     0% {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-50%); /* Ajusta la distancia y velocidad del movimiento */
+        transform: translateX(-50%);
     }
 }
