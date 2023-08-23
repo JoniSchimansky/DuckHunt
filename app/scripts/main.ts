@@ -89,6 +89,10 @@ function addListenerToDucks(): void {
 const pause: HTMLElement = document.querySelector("#pause");
 const play: HTMLElement = document.querySelector("#play");
 const pauseLayout: HTMLElement = document.querySelector('.pause-layout');
+const pauseSound: HTMLAudioElement = new Audio('../../public/sounds/pause.mp3');
+const resumeSound: HTMLAudioElement = new Audio('../../public/sounds/unpause.mp3');
+pauseSound.preload = 'auto';
+resumeSound.preload = 'auto';
 
 pause.addEventListener('click', pauseGame);
 
@@ -98,6 +102,9 @@ function playGame(): void {
     pauseLayout.classList.add('hide');
     pause.classList.remove('hide');
     play.classList.add('hide');
+
+    resumeSound.currentTime = 0; 
+    resumeSound.play();
 
     ducks.forEach((duck) => {
         duck.continueFliying();
@@ -110,6 +117,9 @@ function pauseGame(): void {
     pauseLayout.classList.remove('hide');
     pause.classList.add('hide');
     play.classList.remove('hide');
+
+    pauseSound.currentTime = 0; 
+    pauseSound.play();
 
     ducks.forEach((duck) => {
         duck.stopFliying();
