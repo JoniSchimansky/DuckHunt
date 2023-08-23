@@ -63,6 +63,15 @@ function startNewWave(): void {
     const waveNumberText = gameContainer.querySelector('.wave-number');
     waveNumberText.innerHTML = String(wave);
 
+    const waveSound = new Audio('../../public/sounds/duck-flying.mp3');
+    waveSound.preload = 'auto';
+    waveSound.currentTime = 0;
+    waveSound.play();
+
+    setTimeout(() => {
+        waveSound.pause();
+    }, 1500);
+
     setTimeout(() => {
         for (let numberOfDucks = 0; numberOfDucks < wave; numberOfDucks++) {
             createDuckElement();
