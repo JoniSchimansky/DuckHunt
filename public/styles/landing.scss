@@ -115,10 +115,19 @@
 
 // Animated title
 .animated-title {
-    position: fixed;
-    top: 100px;
-    left: 0;
-    width: 100%;
-    font-size: 36px;
+    transform: rotate(-45deg);
+    transform-origin: left bottom; 
+    position: absolute; 
+    left: 250px; 
+    top: 250px; 
+    animation: blink 1s infinite; 
 }
 
+@keyframes blink {
+    0%, 100% {
+      font-size: 36px;
+    }
+    50% {
+      font-size: 50px;
+    }
+  }
