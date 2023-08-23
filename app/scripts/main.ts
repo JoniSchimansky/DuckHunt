@@ -114,6 +114,7 @@ function playGame(): void {
 
     resumeSound.currentTime = 0; 
     resumeSound.play();
+    backgroundMusic.play();
 
     ducks.forEach((duck) => {
         duck.continueFliying();
@@ -129,6 +130,7 @@ function pauseGame(): void {
 
     pauseSound.currentTime = 0; 
     pauseSound.play();
+    backgroundMusic.pause();
 
     ducks.forEach((duck) => {
         duck.stopFliying();
@@ -136,3 +138,13 @@ function pauseGame(): void {
 
     gameContainer.removeEventListener('click', shotgunFiredEvent);
 }
+
+
+// Background music
+const backgroundMusic = new Audio('../../public/sounds/game-music.mp3');
+backgroundMusic.preload = 'auto';
+backgroundMusic.currentTime = 0;
+window.addEventListener('load', () => {
+    backgroundMusic.volume = 0.05;
+    backgroundMusic.play();
+});
