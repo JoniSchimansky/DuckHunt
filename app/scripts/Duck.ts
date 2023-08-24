@@ -11,6 +11,7 @@ export class Duck implements DuckInterface{
 
     isAlive: boolean = true;
     isFlying: boolean = true;
+    isScared: boolean = false;
     defaultScore: number = DEFAULT_SCORE;
 
     private width: number = DEFAULT_WIDTH;
@@ -59,9 +60,35 @@ export class Duck implements DuckInterface{
             this.alternateDuckImage(duckElement);   
         } else if (!this.isAlive && duckElement !== null) {
             this.killAnimation(duckElement)
+        } else if  (this.isScared && duckElement !== null) {
+            this.flyAway(duckElement);
+            this.alternateDuckImage(duckElement);
         }
 
         requestAnimationFrame(this.fly.bind(this));
+    }
+    
+    flyAway(duckElement: HTMLDivElement) {
+        duckElement.style.transform = 'rotate(330deg)';
+        
+        this.yPosition += -VERTICAL_FALL;
+        duckElement.style.top = this.yPosition + 'px';
+
+        if (this.yPosition <= 0) {
+            duckElement.style.display = 'none'; // Hide the duck
+            duckElement.remove();
+        }
+    }
+
+    reverseFly() {
+        const duckElement: HTMLDivElement = this.findDuckElementById();
+        this.xVelocity *= -1;
+        this.yVelocity *= -1;
+        this.xPosition += this.xVelocity;
+        this.yPosition += this.yVelocity;
+
+        duckElement.style.left = this.xPosition + 'px';
+        duckElement.style.top = this.yPosition + 'px';
     }
 
     render(): HTMLDivElement {
