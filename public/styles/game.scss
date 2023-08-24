@@ -95,8 +95,6 @@
 
 .dead-score {
     position: absolute;
-    top: 50px;
-    left: 50px;
     color: green;
     font-size: 16px;
     opacity: 0;
@@ -108,7 +106,7 @@
 }
 
 .hide-score {
-    animation: hideAnimation 0.1s 100s forwards;
+    animation: hideAnimation 0.5s 500s forwards;
 }
 
 @keyframes hideAnimation {

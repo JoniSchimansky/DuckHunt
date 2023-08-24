@@ -87,16 +87,10 @@ export class Duck implements DuckInterface{
         this.yPosition += VERTICAL_FALL; // Move duck vertically downwards
         duckElement.style.top = this.yPosition + 'px';
 
-        const scoreElement = this.gameContainer.querySelector('.dead-score');
-        scoreElement.classList.toggle('show-score');
-        scoreElement.classList.toggle('hide-score');
-
         // Check if the duck has reached the bottom of the container
         if (this.yPosition > this.gameContainer.clientHeight - this.height) {
             duckElement.style.display = 'none'; // Hide the duck
             duckElement.remove();
-            scoreElement.classList.remove('show-score');
-            scoreElement.classList.remove('hide-score');
         }
     }
 
