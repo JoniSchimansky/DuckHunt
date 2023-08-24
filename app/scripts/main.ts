@@ -1,3 +1,4 @@
+import { DuckType, GROUP_OF_DUCKS } from "../model/Duck.interface";
 import { Duck } from "./Duck";
 import { ScoreStorage } from "./ScoreStorage";
 
@@ -9,6 +10,8 @@ let countdownControls: {
     resume: () => void;
 };
 
+const normalDucksGroup = GROUP_OF_DUCKS;
+
 // Score
 let score: number = 0;
 const ducks: Duck[] = [];
@@ -17,8 +20,8 @@ const scoreElement: HTMLElement = document.querySelector('#score');
 // Waves code
 startNewWave();
 
-function createDuckElement(): void {
-    const duck = new Duck();
+function createDuckElement(type: DuckType): void {
+    const duck = new Duck(type);
     const duckElement = duck.render();
     gameContainer.appendChild(duckElement);
 
@@ -102,10 +105,23 @@ function startNewWave(): void {
     }, 1500);
 
     setTimeout(() => {
+        // normal ducks
         for (let numberOfDucks = 0; numberOfDucks < wave; numberOfDucks++) {
-            createDuckElement();
+            createDuckElement(DuckType.normal);
         }
     
+        // special ducks
+        const specialDucks = (Math.floor(wave / normalDucksGroup));
+        if (specialDucks !== 0) {
+            for (let tankDucks = 0; tankDucks < specialDucks; tankDucks++) {
+                createDuckElement(DuckType.tank);
+            }
+
+            for (let fastDucks = 0; fastDucks < specialDucks; fastDucks++) {
+                createDuckElement(DuckType.fast);
+            }
+        }
+
         startDucksActions();
     }, 1000)
 }
@@ -181,7 +197,7 @@ function pauseGame(): void {
 }
 
 function startCountdown(wave: number) {
-    let seconds = wave <= 3 ? 10 : (wave * 2);
+    let seconds = wave <= 3 ? 10 : (wave * 3);
 
     function updateCountdown() {
         const countdownElement = document.getElementById('seconds');

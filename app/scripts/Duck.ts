@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { DEFAULT_HEIGHT, DEFAULT_SCORE, DEFAULT_WIDTH, DEFAULT_X_VELOCITY, DEFAULT_Y_VELOCITY, DuckInterface, FRAME_INTERVAL, VERTICAL_FALL } from '../model/Duck.interface';
-
+import { DUCKS_PROPERTIES, DuckInterface, DuckType, FRAME_INTERVAL, VERTICAL_FALL } from '../model/Duck.interface';
 export class Duck implements DuckInterface{
     id: string;
 
@@ -12,25 +11,36 @@ export class Duck implements DuckInterface{
     isAlive: boolean = true;
     isFlying: boolean = true;
     isScared: boolean = false;
-    defaultScore: number = DEFAULT_SCORE;
+    defaultScore: number;
+    type: DuckType;
 
-    private width: number = DEFAULT_WIDTH;
-    private height: number = DEFAULT_HEIGHT;
+    private width: number;
+    private height: number;
     private gameContainer: HTMLDivElement = document.querySelector('.game-container');
 
-    private flyingImages: string[] = ['../public/images/duck1.png', '../public/images/duck2.png'];
-    private deathImage: string = '../../public/images/dead_duck.png';
+    private flyingImages: string[];
+    private deathImage: string;
     private flyingImagesToogle: boolean = true;
 
     private frameCount: number = 0; // Counter for frames
     private frameChangeInterval: number = FRAME_INTERVAL; // Change image every 10 frames
 
-    constructor() {
+    constructor(type: DuckType) {
         this.id = uuidv4();
+        this.type = type;
+        this.setPropertiesByType();
+        this.setProportionalVelocity();
         this.xPosition = Math.random() * (this.gameContainer.offsetWidth - this.width);
         this.yPosition = Math.random() * (this.gameContainer.offsetHeight - this.height);
+    }
 
-        this.setProportionalVelocity();
+    setPropertiesByType() {
+        this.flyingImages = [`../public/images/${this.type}_duck1.png`, `../public/images/${this.type}_duck2.png`];
+        this.deathImage = `../../public/images/${this.type}_duck_dead.png`;
+
+        this.width = DUCKS_PROPERTIES[this.type].width;
+        this.height = DUCKS_PROPERTIES[this.type].height;
+        this.defaultScore = DUCKS_PROPERTIES[this.type].score;
     }
 
     fly(): void {
@@ -154,7 +164,7 @@ export class Duck implements DuckInterface{
     }
 
     private setProportionalVelocity() {
-        this.xVelocity =  DEFAULT_X_VELOCITY * (this.gameContainer.offsetWidth / this.gameContainer.offsetHeight);
-        this.yVelocity = DEFAULT_Y_VELOCITY * (this.gameContainer.offsetHeight / this.gameContainer.offsetWidth); 
+        this.xVelocity =  DUCKS_PROPERTIES[this.type].xVelocity * (this.gameContainer.offsetWidth / this.gameContainer.offsetHeight);
+        this.yVelocity = DUCKS_PROPERTIES[this.type].yVelocity * (this.gameContainer.offsetHeight / this.gameContainer.offsetWidth);         
     }
 }
