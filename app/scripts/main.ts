@@ -2,6 +2,11 @@ import { Duck } from "./Duck";
 
 const gameContainer: HTMLDivElement | null = document.querySelector('.game-container');
 let wave: number = 0;
+let countdownInterval: number | null = null;
+let countdownControls: {
+    pause: () => void;
+    resume: () => void;
+};
 
 // Score
 let score: number = 0;
@@ -79,7 +84,10 @@ function duckReached(event: Event, duck: Duck): void {
 
 function startNewWave(): void {
     wave++;
-    console.log(wave)
+
+    clearInterval(countdownInterval);
+    countdownControls = startCountdown(wave);
+
     const waveNumberText = gameContainer.querySelector('.wave-number');
     waveNumberText.innerHTML = String(wave);
 
@@ -110,7 +118,17 @@ function addListenerToDucks(): void {
     ducks.forEach((duck) => {
         const duckElement: HTMLElement = duck.findDuckElementById();
         duckElement.addEventListener('click', (event: Event) => {
+            event.preventDefault();
             duckReached(event, duck);
+        });
+
+        duckElement.addEventListener('dragstart', function(event) {
+            event.preventDefault();
+            duck.reverseFly();
+        });
+          
+        duckElement.addEventListener('drag', function(event) {
+            event.preventDefault(); 
         });
     });
 }
@@ -132,6 +150,7 @@ function playGame(): void {
     pause.classList.remove('hide');
     play.classList.add('hide');
 
+    countdownControls.resume();
     resumeSound.currentTime = 0; 
     resumeSound.play();
     backgroundMusic.play();
@@ -148,6 +167,7 @@ function pauseGame(): void {
     pause.classList.add('hide');
     play.classList.remove('hide');
 
+    countdownControls.pause();
     pauseSound.currentTime = 0; 
     pauseSound.play();
     backgroundMusic.pause();
@@ -159,6 +179,67 @@ function pauseGame(): void {
     gameContainer.removeEventListener('click', shotgunFiredEvent);
 }
 
+function startCountdown(wave: number) {
+    let seconds = wave <= 3 ? 10 : (wave * 2);
+
+    function updateCountdown() {
+        const countdownElement = document.getElementById('seconds');
+        if (countdownElement) {
+            countdownElement.textContent = `${seconds}`;
+        }
+
+        if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            gameOver();
+        }
+
+        if (seconds <= 3) {
+            playCountdownSound();
+        }
+        seconds--;
+    }
+
+    updateCountdown();
+
+    function pauseCountdown() {
+        clearInterval(countdownInterval);
+    }
+
+    function resumeCountdown() {
+        countdownInterval = setInterval(updateCountdown, 1000);
+    }
+
+    countdownInterval = setInterval(updateCountdown, 1000);
+
+    return {
+        pause: pauseCountdown,
+        resume: resumeCountdown
+    };
+}
+
+function gameOver() {
+    const gameOverLayout = document.querySelector('.game-over-layout');
+    pause.classList.add('hide');
+    gameOverLayout.classList.remove('hide');
+
+    ducks.forEach((duck: Duck) => {
+        duck.isScared = true;
+        duck.isFlying = false;
+    })
+
+    const restartGame = document.querySelector('#reload');
+    restartGame.addEventListener('click', () => {
+        window.location.reload();
+    })
+}
+
+function playCountdownSound() {
+    const countdownSound = new Audio('../../public/sounds/countdown.mp3');
+    countdownSound.preload = 'auto';
+    countdownSound.currentTime = 0;
+    countdownSound.volume = 0.3;
+    countdownSound.play();
+}
 
 // Background music
 const backgroundMusic = new Audio('../../public/sounds/game-music.mp3');

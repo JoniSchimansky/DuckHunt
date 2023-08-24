@@ -24,10 +24,18 @@
         <div class="pause-layout hide">
             <h2>PAUSED</h2>
         </div>
+        <div class="game-over-layout hide">
+            <div class="game-over-content">
+                <h2>GAME OVER</h2>
+                <p>The ducks have been frightened</p>
+                <i id="reload" class="fa-solid fa-rotate-right"></i>
+            </div>
+        </div>
         <div class="game-background">
             <img id="game-background" src="../public/images/background.png" alt="" width=100%>
         </div>
         <div class="score">Score: <span id="score">0</span></div>
+        <div class="countdown">Time: <span id="seconds">10</span></div>
         <h2 class="wave-title">WAVE <span class="wave-number">1</span></h2>
     </div>
     <script type="module" src="scripts/main.ts"></script>
