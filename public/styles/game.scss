@@ -129,6 +129,12 @@
     @include tablet-portrait {
         width: 50px;
     }
+
+    .duck-hit {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+    }
 }
 
 .duck.dead {

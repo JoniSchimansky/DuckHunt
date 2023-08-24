@@ -13,6 +13,7 @@ export class Duck implements DuckInterface{
     isScared: boolean = false;
     defaultScore: number;
     type: DuckType;
+    shotsToDie: number;
 
     private width: number;
     private height: number;
@@ -41,6 +42,7 @@ export class Duck implements DuckInterface{
         this.width = DUCKS_PROPERTIES[this.type].width;
         this.height = DUCKS_PROPERTIES[this.type].height;
         this.defaultScore = DUCKS_PROPERTIES[this.type].score;
+        this.shotsToDie = DUCKS_PROPERTIES[this.type].shotsToDie;
     }
 
     fly(): void {
