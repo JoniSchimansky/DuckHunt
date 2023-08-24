@@ -1,4 +1,5 @@
 import { Duck } from "./Duck";
+import { ScoreStorage } from "./ScoreStorage";
 
 const gameContainer: HTMLDivElement | null = document.querySelector('.game-container');
 let wave: number = 0;
@@ -225,12 +226,14 @@ function gameOver() {
     ducks.forEach((duck: Duck) => {
         duck.isScared = true;
         duck.isFlying = false;
-    })
+    });
 
     const restartGame = document.querySelector('#reload');
     restartGame.addEventListener('click', () => {
         window.location.reload();
-    })
+    });
+
+    ScoreStorage.save(wave, score);
 }
 
 function playCountdownSound() {
