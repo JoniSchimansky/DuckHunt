@@ -13,9 +13,9 @@
 4. Utiliza tu ratón o los controles táctiles para apuntar y disparar a los patos. ¡Apunta con precisión!
 5. Cada vez que eliminas un pato, ganas puntos.
 6. Hay 3 tipos de patos:
-    - Pato normal (verde): muere de un tiro, +1 score.
-    - Pato tanque (Amarillo): muere de dos tiros, +2 score.
-    - Pato veloz (Azul): muere de un tiro (si puedes alcanzarlo...), +3 score.
+    - Pato normal (verde): muere de un tiro, +5 score.
+    - Pato tanque (Amarillo): muere de dos tiros, +10 score.
+    - Pato veloz (Azul): muere de un tiro (si puedes alcanzarlo...), +15 score.
 6. Si logras eliminar todos los patos de una oleada antes de que se acabe el tiempo, pasarás a la siguiente oleada, que será un poco más desafiante.
 
 ## Características Clave
