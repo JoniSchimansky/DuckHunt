@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { DUCKS_PROPERTIES, DuckInterface, DuckType, FRAME_INTERVAL, VERTICAL_FALL } from '../model/Duck.interface';
+
 export class Duck implements DuckInterface{
     id: string;
 
@@ -36,8 +37,8 @@ export class Duck implements DuckInterface{
     }
 
     setPropertiesByType() {
-        this.flyingImages = [`../public/images/${this.type}_duck1.png`, `../public/images/${this.type}_duck2.png`];
-        this.deathImage = `../../public/images/${this.type}_duck_dead.png`;
+        this.flyingImages = [DUCKS_PROPERTIES[this.type].upAsset, DUCKS_PROPERTIES[this.type].downAsset];
+        this.deathImage = DUCKS_PROPERTIES[this.type].deadAsset;
 
         this.width = DUCKS_PROPERTIES[this.type].width;
         this.height = DUCKS_PROPERTIES[this.type].height;

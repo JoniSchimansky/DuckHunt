@@ -1,6 +1,14 @@
 import { DuckType, GROUP_OF_DUCKS } from "../model/Duck.interface";
 import { Duck } from "./Duck";
 import { ScoreStorage } from "./ScoreStorage";
+import shotgunSoundAsset from '../public/sounds/shotgun.mp3';
+import waveSoundAsset from '../public/sounds/duck-flying.mp3';
+import pauseSoundAsset from '../public/sounds/pause.mp3';
+import unpauseSoundAsset from '../public/sounds/unpause.mp3';
+import gameOverSoundAsset from '../public/sounds/game-over.mp3';
+import backgroundMusicAsset from '../public/sounds/game-music.mp3';
+import countdownSoundAsset from '../public/sounds/countdown.mp3';
+import bloodAsset from '../public/images/blood.png';
 
 const gameContainer: HTMLDivElement | null = document.querySelector('.game-container');
 let wave: number = 0;
@@ -37,7 +45,7 @@ function startDucksActions(): void {
 }
 
 // Shotgun sound
-const shotgunSound: HTMLAudioElement = new Audio('../../public/sounds/shotgun.mp3');
+const shotgunSound: HTMLAudioElement = new Audio(shotgunSoundAsset);
 shotgunSound.preload = 'auto';
 
 
@@ -57,7 +65,7 @@ function duckReached(event: Event, duck: Duck): void {
 
     if (duck.shotsToDie !== 0) {
         const duckHit = document.createElement('img');
-        duckHit.src="../../public/images/blood.png"
+        duckHit.src= bloodAsset;
         duckHit.classList.add('duck-hit');
         
         duckElement.appendChild(duckHit);
@@ -106,7 +114,7 @@ function startNewWave(): void {
     const waveNumberText = gameContainer.querySelector('.wave-number');
     waveNumberText.innerHTML = String(wave);
 
-    const waveSound = new Audio('../../public/sounds/duck-flying.mp3');
+    const waveSound = new Audio(waveSoundAsset);
     waveSound.preload = 'auto';
     waveSound.currentTime = 0;
     waveSound.play();
@@ -164,8 +172,8 @@ function addListenerToDucks(): void {
 const pause: HTMLElement = document.querySelector("#pause");
 const play: HTMLElement = document.querySelector("#play");
 const pauseLayout: HTMLElement = document.querySelector('.pause-layout');
-const pauseSound: HTMLAudioElement = new Audio('../../public/sounds/pause.mp3');
-const resumeSound: HTMLAudioElement = new Audio('../../public/sounds/unpause.mp3');
+const pauseSound: HTMLAudioElement = new Audio(pauseSoundAsset);
+const resumeSound: HTMLAudioElement = new Audio(unpauseSoundAsset);
 pauseSound.preload = 'auto';
 resumeSound.preload = 'auto';
 
@@ -248,7 +256,7 @@ function startCountdown(wave: number) {
 function gameOver() {
     backgroundMusic.pause();
 
-    const gameOverSound = new Audio('../../public/sounds/game-over.mp3');
+    const gameOverSound = new Audio(gameOverSoundAsset);
     gameOverSound.preload = 'auto';
     gameOverSound.currentTime = 0;
     gameOverSound.play();
@@ -269,7 +277,7 @@ function gameOver() {
     });
 
     exitGame.addEventListener('click', () => {
-        window.location.href = '../../index.html';
+        window.location.href = '../index.html';
     });
 
 
@@ -277,7 +285,7 @@ function gameOver() {
 }
 
 function playCountdownSound() {
-    const countdownSound = new Audio('../../public/sounds/countdown.mp3');
+    const countdownSound = new Audio(countdownSoundAsset);
     countdownSound.preload = 'auto';
     countdownSound.currentTime = 0;
     countdownSound.volume = 0.3;
@@ -285,7 +293,7 @@ function playCountdownSound() {
 }
 
 // Background music
-const backgroundMusic = new Audio('../../public/sounds/game-music.mp3');
+const backgroundMusic = new Audio(backgroundMusicAsset);
 backgroundMusic.preload = 'auto';
 backgroundMusic.currentTime = 0;
 window.addEventListener('load', () => {

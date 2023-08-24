@@ -1,4 +1,7 @@
-import { MaxScore, ScoreStorage } from "./ScoreStorage";
+import { MaxScore } from "../model/MaxScore.interface";
+import { ScoreStorage } from "./ScoreStorage";
+import duckQuackSoundAsset from '../public/sounds/duck-quack.mp3';
+import gameStartSoundAsset from '../public/sounds/game-start.mp3';
 
 //show max score
 const maxScore: MaxScore | null = ScoreStorage.read();
@@ -28,8 +31,9 @@ playButton.addEventListener('mouseleave', () => {
 
 // Start sounds
 const startGameButton: HTMLElement = document.getElementById('start-game-button');
-const duckQuackSound: HTMLAudioElement = new Audio('../../public/sounds/duck-quack.mp3');
-const gameStartSound: HTMLAudioElement = new Audio('../../public/sounds/game-start.mp3');
+const duckQuackSound: HTMLAudioElement = new Audio(duckQuackSoundAsset);
+const gameStartSound: HTMLAudioElement = new Audio(gameStartSoundAsset);
+
 duckQuackSound.preload = 'auto';
 gameStartSound.preload = 'auto';
 
@@ -41,7 +45,7 @@ function startSoundsEvent(): void {
 
     // Call game page after a litle delay
     setTimeout(() => {
-        window.location.href = '../app/game.html';
+        window.location.href = 'game.html';
     }, 1600);
 }
 

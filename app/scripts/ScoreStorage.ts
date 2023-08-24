@@ -1,7 +1,4 @@
-export interface MaxScore {
-    wave: number;
-    score: number;
-}
+import { MaxScore } from "../model/MaxScore.interface";
 
 export class ScoreStorage {
     static save(wave: number, score: number) {
