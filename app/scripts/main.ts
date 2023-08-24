@@ -49,12 +49,32 @@ function duckReached(event: Event, duck: Duck): void {
     score += duckPoints;
     scoreElement.textContent = score.toString();
     
-    duck.kill();
+    // Add score on dead
+    const deadScoreElement: HTMLSpanElement  = document.createElement('span');
+    deadScoreElement.classList.add('dead-score');
+    deadScoreElement.textContent = `+${duck.defaultScore}`;
+    gameContainer.append(deadScoreElement);
+    
+    deadScoreElement.style.top = duck.yPosition + 'px';
+    deadScoreElement.style.left = duck.xPosition + 'px';
 
+    deadScoreElement.classList.add('show-score');
+
+    duck.kill();
+    
     deleteDuck(duck);
     if (ducks.length === 0) {
         startNewWave();
     }
+
+    // hide score after delay
+    setTimeout(() => {
+        deadScoreElement.classList.remove('show-score');
+        deadScoreElement.classList.add('hide-score');
+        setTimeout(() => {
+            deadScoreElement.remove();
+        }, 500);
+    }, 500);
 }
 
 function startNewWave(): void {

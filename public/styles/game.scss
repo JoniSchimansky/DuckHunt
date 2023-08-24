@@ -92,3 +92,28 @@
 .game-container {
     cursor: url('../images/crosshair.png'), auto;
 }
+
+.dead-score {
+    position: absolute;
+    color: green;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease; 
+}
+
+.show-score {
+    opacity: 1;
+}
+
+.hide-score {
+    animation: hideAnimation 0.5s 500s forwards;
+}
+
+@keyframes hideAnimation {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

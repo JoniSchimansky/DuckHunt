@@ -80,6 +80,7 @@ export class Duck implements DuckInterface{
     }
 
     killAnimation(duckElement: HTMLDivElement): void {
+        
         const duckImage = duckElement.querySelector('img');
         duckImage.src = this.deathImage;
 
