@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-
-    /* Modules */
-    "module": "commonjs",
+    "target": "esnext",
+    "module": "esnext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
 
     /* Type Checking */
     "strict": true,
     "strictNullChecks": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "outDir": "./app/dist",
+    "types": ["vite/client"],
   }
 }
