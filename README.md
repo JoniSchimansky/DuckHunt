@@ -27,7 +27,7 @@
 - **Puntuación Máxima:** También se guarda tu puntuación máxima. ¡Intenta superarte a ti mismo y a tus amigos!
 
 ## Requisitos del Sistema
-- Sistema operativo: Windows 7/8/10, macOS, o Linux.
+- Sistema operativo: Windows 7/8/10/11, macOS, o Linux.
 - Ratón o dispositivo de entrada compatible.
 
 **¡Disfruta el juego!**
