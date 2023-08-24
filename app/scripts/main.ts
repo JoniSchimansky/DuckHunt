@@ -219,6 +219,13 @@ function startCountdown(wave: number) {
 }
 
 function gameOver() {
+    backgroundMusic.pause();
+
+    const gameOverSound = new Audio('../../public/sounds/game-over.mp3');
+    gameOverSound.preload = 'auto';
+    gameOverSound.currentTime = 0;
+    gameOverSound.play();
+
     const gameOverLayout = document.querySelector('.game-over-layout');
     pause.classList.add('hide');
     gameOverLayout.classList.remove('hide');
@@ -228,10 +235,16 @@ function gameOver() {
         duck.isFlying = false;
     });
 
-    const restartGame = document.querySelector('#reload');
+    const restartGame = document.querySelector('#restart');
+    const exitGame = document.querySelector('#exit');
     restartGame.addEventListener('click', () => {
         window.location.reload();
     });
+
+    exitGame.addEventListener('click', () => {
+        window.location.href = '../../index.html';
+    });
+
 
     ScoreStorage.save(wave, score);
 }
