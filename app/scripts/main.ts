@@ -53,6 +53,17 @@ gameContainer.addEventListener('click', shotgunFiredEvent);
 function duckReached(event: Event, duck: Duck): void {
     const duckElement = event.currentTarget as HTMLElement;
     
+    duck.shotsToDie--;
+
+    if (duck.shotsToDie !== 0) {
+        const duckHit = document.createElement('img');
+        duckHit.src="../../public/images/blood.png"
+        duckHit.classList.add('duck-hit');
+        
+        duckElement.appendChild(duckHit);
+        return;
+    }
+
     // Increase the global score
     const duckPoints = Number(duckElement.getAttribute('data-score'));
     score += duckPoints;
@@ -197,7 +208,8 @@ function pauseGame(): void {
 }
 
 function startCountdown(wave: number) {
-    let seconds = wave <= 3 ? 10 : (wave * 3);
+    // let seconds = wave <= 3 ? 10 : (wave * 3);
+    let seconds = 999;
 
     function updateCountdown() {
         const countdownElement = document.getElementById('seconds');

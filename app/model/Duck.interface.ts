@@ -8,6 +8,7 @@ export const DUCKS_PROPERTIES = {
         width: 100,
         height: 70,
         score: 5,
+        shotsToDie: 1
     },
     tank: {
         xVelocity: 1,
@@ -15,6 +16,7 @@ export const DUCKS_PROPERTIES = {
         width: 140,
         height: 80,
         score: 10,
+        shotsToDie: 2
     },
     fast: {
         xVelocity: 3,
@@ -22,6 +24,7 @@ export const DUCKS_PROPERTIES = {
         width: 70,
         height: 60,
         score: 15,
+        shotsToDie: 1
     },
 }
 
@@ -39,6 +42,7 @@ export interface DuckInterface {
     isScared: boolean;
     defaultScore: number;
     type: DuckType;
+    shotsToDie: number;
 }
 
 export enum DuckType {
