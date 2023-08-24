@@ -7,6 +7,7 @@
 - **josuemiro**
 
 ## Cómo Jugar
+[Entra en:]( https://duck-hunt-five.vercel.app/).
 1. Inicia el juego.
 2. El juego se desarrolla en oleadas de patos que vuelan a través de la pantalla.
 3. Tu objetivo es eliminar todos los patos de cada oleada antes de que se agote el tiempo.
@@ -29,6 +30,20 @@
 ## Requisitos del Sistema
 - Sistema operativo: Windows 7/8/10/11, macOS, o Linux.
 - Ratón o dispositivo de entrada compatible.
+
+## Instalación
+- Clonar repositorio.
+```
+git clone https://github.com/JoniSchimansky/DuckHunt.git duck-hunt
+```
+- Instalar dependencias
+```
+npm install
+```
+- Ejecutar servidor local
+```
+npm run dev
+```
 
 **¡Disfruta el juego!**
 ¡Diviértete cazando patos y alcanzando nuevas alturas! Si tienes comentarios, sugerencias o problemas, no dudes en ponerte en contacto con nosotros a través de las issues del repositorio.
