@@ -118,7 +118,6 @@
 
 .duck {
     position: absolute;
-    width: 100px;
     
     transition: transform 0.1s linear;
 
@@ -129,10 +128,6 @@
     
     @include tablet-portrait {
         width: 50px;
-    }
-
-    img {
-        width: 100%;
     }
 }
 

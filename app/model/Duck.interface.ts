@@ -1,25 +1,32 @@
-// Default duck
-export const DEFAULT_X_VELOCITY:number = 2;
-export const DEFAULT_Y_VELOCITY:number = 2;
-export const DEFAULT_WIDTH: number = 100;
-export const DEFAULT_HEIGHT: number = 70;
-export const DEFAULT_SCORE: number = 1;
 export const FRAME_INTERVAL: number = 10;
 export const VERTICAL_FALL: number = 7;
 
-// Tank duck
-export const DEFAULT_TANK_X_VELOCITY:number = 1;
-export const DEFAULT_TANK_Y_VELOCITY:number = 1;
-export const DEFAULT_TANK_WIDTH: number = 140;
-export const DEFAULT_TANK_HEIGHT: number = 80;
-export const DEFAULT_TANK_SCORE: number = 2;
+export const DUCKS_PROPERTIES = {
+    normal : {
+        xVelocity: 2,
+        yVelocity: 2,
+        width: 100,
+        height: 70,
+        score: 5,
+    },
+    tank: {
+        xVelocity: 1,
+        yVelocity: 1,
+        width: 140,
+        height: 80,
+        score: 10,
+    },
+    fast: {
+        xVelocity: 3,
+        yVelocity: 3,
+        width: 70,
+        height: 60,
+        score: 15,
+    },
+}
 
-// Fast duck
-export const DEFAULT_FAST_X_VELOCITY:number = 3;
-export const DEFAULT_FAST_Y_VELOCITY:number = 3;
-export const DEFAULT_FAST_WIDTH: number = 70;
-export const DEFAULT_FAST_HEIGHT: number = 60;
-export const DEFAULT_FAST_SCORE: number = 3;
+// Generate special ducks each X normal
+export const GROUP_OF_DUCKS: number = 4;
 
 export interface DuckInterface {
     id: string;
@@ -31,4 +38,11 @@ export interface DuckInterface {
     isFlying: boolean;
     isScared: boolean;
     defaultScore: number;
+    type: DuckType;
+}
+
+export enum DuckType {
+    normal = 'normal',
+    tank = 'tank',
+    fast = 'fast',
 }
