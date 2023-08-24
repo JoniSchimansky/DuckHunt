@@ -208,8 +208,7 @@ function pauseGame(): void {
 }
 
 function startCountdown(wave: number) {
-    // let seconds = wave <= 3 ? 10 : (wave * 3);
-    let seconds = 999;
+    let seconds = wave <= 3 ? 10 : (wave * 3);
 
     function updateCountdown() {
         const countdownElement = document.getElementById('seconds');
