@@ -29,6 +29,21 @@
         width: 90%;
     }
 
+    .max-score-info {
+        text-align: center;
+        color: #32BEA6;
+
+        p {
+            font-size: 20px;
+            margin: 0;
+            line-height: 25px;
+
+            span {
+                font-weight: bold;
+            }
+        }
+    }
+
     .play-title {
         text-align: center;
         margin-top: 20px;
