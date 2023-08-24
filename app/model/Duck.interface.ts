@@ -29,5 +29,6 @@ export interface DuckInterface {
     yVelocity: number;
     isAlive: boolean;
     isFlying: boolean;
+    isScared: boolean;
     defaultScore: number;
 }
