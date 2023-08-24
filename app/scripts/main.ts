@@ -63,6 +63,15 @@ function startNewWave(): void {
     const waveNumberText = gameContainer.querySelector('.wave-number');
     waveNumberText.innerHTML = String(wave);
 
+    const waveSound = new Audio('../../public/sounds/duck-flying.mp3');
+    waveSound.preload = 'auto';
+    waveSound.currentTime = 0;
+    waveSound.play();
+
+    setTimeout(() => {
+        waveSound.pause();
+    }, 1500);
+
     setTimeout(() => {
         for (let numberOfDucks = 0; numberOfDucks < wave; numberOfDucks++) {
             createDuckElement();
@@ -89,6 +98,10 @@ function addListenerToDucks(): void {
 const pause: HTMLElement = document.querySelector("#pause");
 const play: HTMLElement = document.querySelector("#play");
 const pauseLayout: HTMLElement = document.querySelector('.pause-layout');
+const pauseSound: HTMLAudioElement = new Audio('../../public/sounds/pause.mp3');
+const resumeSound: HTMLAudioElement = new Audio('../../public/sounds/unpause.mp3');
+pauseSound.preload = 'auto';
+resumeSound.preload = 'auto';
 
 pause.addEventListener('click', pauseGame);
 
@@ -98,6 +111,10 @@ function playGame(): void {
     pauseLayout.classList.add('hide');
     pause.classList.remove('hide');
     play.classList.add('hide');
+
+    resumeSound.currentTime = 0; 
+    resumeSound.play();
+    backgroundMusic.play();
 
     ducks.forEach((duck) => {
         duck.continueFliying();
@@ -111,9 +128,23 @@ function pauseGame(): void {
     pause.classList.add('hide');
     play.classList.remove('hide');
 
+    pauseSound.currentTime = 0; 
+    pauseSound.play();
+    backgroundMusic.pause();
+
     ducks.forEach((duck) => {
         duck.stopFliying();
     });
 
     gameContainer.removeEventListener('click', shotgunFiredEvent);
 }
+
+
+// Background music
+const backgroundMusic = new Audio('../../public/sounds/game-music.mp3');
+backgroundMusic.preload = 'auto';
+backgroundMusic.currentTime = 0;
+window.addEventListener('load', () => {
+    backgroundMusic.volume = 0.05;
+    backgroundMusic.play();
+});
